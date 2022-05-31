@@ -22,7 +22,8 @@ def menu():
     print("1-Jogar")
     print("2-Listar palavras")
     print("3-Cadastrar palavras")
-    print("4-Sair do jogo")
+    print("4-Excluir palavra")
+    print("5-Sair do jogo")
 
     opcao = input("Opção: ")
 
@@ -33,6 +34,8 @@ def menu():
     elif opcao == "3":
         cadastrar_palavras()
     elif opcao == "4":
+        excluir_palavra()
+    elif opcao == "5":
         sair_do_jogo()
     else:
         print("Insira uma opção válida ;P")
@@ -83,7 +86,32 @@ def cadastrar_palavras():
     lista_de_palavras.append(cadastro)      
     print("Palavra cadastrada com sucesso")
     menu()
-    
+
+def excluir_palavra():
+    print("#### EXCLUIR PALAVRAS ####")
+    print("--------------------------")  
+    id = 0
+    id_lista = []
+    for i in lista_de_palavras:
+        print(id, "-", i)
+        id_lista.append(id)
+        id += 1
+    exclusao = int(input("Digite o numero do indice da palavra que deseja excluir: "))
+
+    posicao = 0
+    if exclusao in id_lista:
+        del lista_de_palavras[exclusao]
+        print("Palavra excluida com sucesso")
+        sleep(0.5)
+        for i in lista_de_palavras:
+            print(id, "-", i)
+            id += 1
+        menu()
+    else: 
+        print("Erro ao tentar excluir")
+        excluir_palavra()
+
+
 def sair_do_jogo():
     print("Até logo!")
     pass
@@ -201,6 +229,7 @@ def adivinhacao():
             venceu()
         elif enforcou:
             sleep(1)
+            print(f"A palavra era {palavra_secreta}")
             perdeu()
             
 main()
