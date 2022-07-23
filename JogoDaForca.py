@@ -66,12 +66,19 @@ def listar_palavras():
 def cadastrar_palavras():
     print("#### CADASTRAR PALAVRAS ####")
     print("----------------------------")
+    print("0 - Sair")
+    print("----------------------------")
     cadastro = input("Digite a palavra desejada: ")
     simbolos = "!@#$%¨&*((){}^`:?;§¨´`,.ªº[]?/|\_-'+=~1234567890"
     gaps = " "
+   
+
+    if cadastro == '0':
+        menu()
+        
     for index in cadastro:
-        for sin in simbolos:
-            if index == sin or index == gaps:
+        for sim in simbolos:
+            if index == sim or index == gaps:
                 print("Palavra inválida")
                 cadastrar_palavras()
                 sleep(0.5)
@@ -82,39 +89,51 @@ def cadastrar_palavras():
     if cadastro in lista_de_palavras:
         print("Esta palavra ja está cadastrada")
         cadastrar_palavras()
-  
+
     lista_de_palavras.append(cadastro)      
     print("Palavra cadastrada com sucesso")
     menu()
 
+
+    print("Algo deu errado, tente novamente")
+    cadastrar_palavras()
+
 def excluir_palavra():
     print("#### EXCLUIR PALAVRAS ####")
     print("--------------------------")  
-    id = 0
+    id = 1
     id_lista = []
     for i in lista_de_palavras:
         print(id, "-", i)
         id_lista.append(id)
         id += 1
+    print('0 - Sair')
+
+
     exclusao = int(input("Digite o numero do indice da palavra que deseja excluir: "))
 
-    posicao = 0
-    if exclusao in id_lista:
-        del lista_de_palavras[exclusao]
-        print("Palavra excluida com sucesso")
-        sleep(0.5)
-        for i in lista_de_palavras:
-            print(id, "-", i)
-            id += 1
-        menu()
-    else: 
-        print("Erro ao tentar excluir")
-        excluir_palavra()
 
+    if exclusao == 0: 
+        return menu()
+    else:
+        if exclusao in id_lista:
+            del lista_de_palavras[exclusao]
+            print("Palavra excluida com sucesso")
+            sleep(0.5)
+            for i in lista_de_palavras:
+                print(id, "-", i)
+                id += 1
+            menu()
+        else: 
+            print("Erro ao tentar excluir")
+            excluir_palavra()
+
+    print("Digite um número que corresponde a uma palavra")
+    excluir_palavra()
 
 def sair_do_jogo():
     print("Até logo!")
-    pass
+    exit()
 
 # Parte da jogabilidade
 def fim_do_jogo():
